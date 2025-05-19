@@ -1,72 +1,41 @@
-const contractAddress = "0xYourContractAddressHere"; // Thay bằng địa chỉ hợp đồng thật
-const abi = [
-  {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "inputs": [],
-    "name": "getBalance",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "_amount", "type": "uint256" }],
-    "name": "withdraw",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "stateMutability": "payable",
-    "type": "receive"
-  }
-];
 
-let provider, signer, contract;
+let web3;
 
 async function connectWallet() {
-  if (!window.ethereum) {
+  if (window.ethereum) {
+    web3 = new Web3(window.ethereum);
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    alert("Kết nối MetaMask thành công");
+  } else {
     alert("Vui lòng cài MetaMask!");
-    return;
   }
-
-  provider = new ethers.providers.Web3Provider(window.ethereum);
-  await provider.send("eth_requestAccounts", []);
-  signer = provider.getSigner();
-  const account = await signer.getAddress();
-  document.getElementById("account").innerText = "Địa chỉ ví: " + account;
-  contract = new ethers.Contract(contractAddress, abi, signer);
-  getBalance();
 }
 
 async function getBalance() {
-  const balance = await contract.getBalance();
-  document.getElementById("balance").innerText = ethers.utils.formatEther(balance) + " ETH";
+  const accounts = await web3.eth.getAccounts();
+  const balanceWei = await web3.eth.getBalance(accounts[0]);
+  const balanceEth = web3.utils.fromWei(balanceWei, 'ether');
+  document.getElementById("balance").innerText = parseFloat(balanceEth).toFixed(4);
 }
 
-async function deposit() {
-  const amount = document.getElementById("depositAmount").value;
-  const tx = await signer.sendTransaction({
-    to: contractAddress,
-    value: ethers.utils.parseEther(amount)
-  });
-  await tx.wait();
-  alert("Gửi thành công!");
+async function depositETH() {
+  const accounts = await web3.eth.getAccounts();
+  const value = web3.utils.toWei(document.getElementById("depositAmount").value, 'ether');
+  await web3.eth.sendTransaction({ from: accounts[0], to: '0x0C85940906A6c957476ce75752DBBbdf3b66fBc9', value });
+  appendHistory(`Nạp ${document.getElementById("depositAmount").value} ETH`);
   getBalance();
 }
 
-async function withdraw() {
-  const amount = document.getElementById("withdrawAmount").value;
-  try {
-    const tx = await contract.withdraw(ethers.utils.parseEther(amount));
-    await tx.wait();
-    alert("Rút thành công!");
-    getBalance();
-  } catch (err) {
-    alert("Không thể rút: Có thể bạn không phải owner hoặc lỗi khác.");
-    console.error(err);
-  }
+async function withdrawETH() {
+  const accounts = await web3.eth.getAccounts();
+  const value = web3.utils.toWei(document.getElementById("withdrawAmount").value, 'ether');
+  appendHistory(`Rút ${document.getElementById("withdrawAmount").value} ETH`);
+  getBalance();
+}
+
+function appendHistory(msg) {
+  const item = document.createElement("li");
+  item.className = "list-group-item";
+  item.innerText = `${new Date().toLocaleString()}: ${msg}`;
+  document.getElementById("history").prepend(item);
 }
