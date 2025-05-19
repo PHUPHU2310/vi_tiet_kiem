@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ví Tiết Kiệm Cá Nhân</title>
+</head>
+<body>
+  <h2>Kết nối ví tiết kiệm (Sepolia)</h2>
+  <button onclick="connectWallet()">🔗 Kết nối MetaMask</button>
+  <p id="account"></p>
+
+  <h3>Số dư ví tiết kiệm:</h3>
+  <p id="balance">--</p>
+  <button onclick="getBalance()">🔄 Làm mới</button>
+
+  <h3>Nạp ETH vào hợp đồng</h3>
+  <input id="depositAmount" type="number" placeholder="Số ETH" />
+  <button onclick="deposit()">💰 Gửi ETH</button>
+
+  <h3>Rút ETH (chỉ chủ sở hữu)</h3>
+  <input id="withdrawAmount" type="number" placeholder="Số ETH" />
+  <button onclick="withdraw()">🏧 Rút ETH</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
