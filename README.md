@@ -38,7 +38,8 @@
 
 📜 Smart Contract (SavingsWallet.sol)
 
-![Smart Contracts](https://github.com/user-attachments/assets/d694f22f-96c9-449c-af34-2708afa7004a)
+![smart contract](https://github.com/user-attachments/assets/8f4fed0a-4d32-45fe-9648-30f6cc1467ac)
+
 
 
 🔒 Bảo mật & Lưu ý
