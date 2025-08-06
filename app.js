@@ -2,7 +2,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 let signer;
 let contract;
 
-const CONTRACT_ADDRESS = "YOUR_CONTRACT_ADDRESS";
+const CONTRACT_ADDRESS = "0x0C85940906A6c957476ce75752DBBbdf3b66fBc9";
 const ABI = [
   "function deposit() public payable",
   "function withdraw(uint256 amount) public",
