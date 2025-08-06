@@ -1,39 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ví Tiết Kiệm </title>
-  <link rel="stylesheet" href="style.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ví Tiết Kiệm Cá Nhân</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 </head>
-<body>
-  <div class="container">
-    <h2>💰 Ví Tiết Kiệm Cá Nhân</h2>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-4">
+      <img src="https://cdn-icons-png.flaticon.com/512/1042/1042269.png" width="80"/>
+      <h1 class="mt-3">Ví Tiết Kiệm </h1>
+    </div>
 
-    <button onclick="connectWallet()">🔗 Kết nối MetaMask</button>
+    <div class="card p-4 shadow-sm mb-4">
+      <button class="btn btn-primary mb-3" onclick="connectWallet()">🔗 Kết nối MetaMask</button>
+      <p><strong>Số dư ví tiết kiệm:</strong> <span id="balance">--</span> ETH</p>
+      <button class="btn btn-outline-info" onclick="getBalance()">🔄 Làm mới</button>
+    </div>
 
-    <p><strong>Số dư hợp đồng:</strong> <span id="balance">0 ETH</span></p>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card p-4 shadow-sm">
+          <h5>Nạp ETH vào hợp đồng</h5>
+          <input type="number" id="depositAmount" placeholder="Số ETH" class="form-control my-2"/>
+          <button class="btn btn-success w-100" onclick="depositETH()">🪙 Gửi ETH</button>
+        </div>
+      </div>
 
-    <input
-      type="number"
-      id="depositAmount"
-      placeholder="Nhập số ETH muốn nạp"
-      min="0.000000000000000001"
-      step="any"
-    />
-    <button onclick="depositETH()">➕ Nạp vào ví</button>
+      <div class="col-md-6">
+        <div class="card p-4 shadow-sm">
+          <h5>Rút ETH (chỉ chủ sở hữu)</h5>
+          <input type="number" id="withdrawAmount" placeholder="Số ETH" class="form-control my-2"/>
+          <button class="btn btn-danger w-100" onclick="withdrawETH()">⏎ Rút ETH</button>
+        </div>
+      </div>
+    </div>
 
-    <input
-      type="number"
-      id="withdrawAmount"
-      placeholder="Nhập số ETH muốn rút"
-      min="0.000000000000000001"
-      step="any"
-    />
-    <button onclick="withdrawETH()">➖ Rút khỏi ví</button>
-
-    <div class="status-box" id="status"></div>
+    <div class="card mt-5 p-4 shadow-sm">
+      <h5>Lịch sử giao dịch (10 gần nhất)</h5>
+      <ul id="history" class="list-group list-group-flush"></ul>
+    </div>
   </div>
 
   <script src="app.js"></script>
