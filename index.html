@@ -17,7 +17,7 @@
     </div>
 
     <div class="card p-4 shadow-sm mb-4">
-      <button class="btn btn-primary mb-3" onclick="connectWallet()">🔗 Kết nối MetaMask</button>
+      <button class="btn btn-primary mb-3" onclick="connectWallet()">🔗 Kết nối tới ví</button>
       <p><strong>Số dư ví tiết kiệm:</strong> <span id="balance">--</span> ETH</p>
       <button class="btn btn-outline-info" onclick="getBalance()">🔄 Làm mới</button>
     </div>
@@ -25,17 +25,17 @@
     <div class="row g-4">
       <div class="col-md-6">
         <div class="card p-4 shadow-sm">
-          <h5>Nạp ETH vào hợp đồng</h5>
-          <input type="number" id="depositAmount" placeholder="Số ETH" class="form-control my-2"/>
-          <button class="btn btn-success w-100" onclick="depositETH()">🪙 Gửi ETH</button>
+          <h5>Nạp tiền vào ví</h5>
+          <input type="number" id="depositAmount" placeholder="Số tiền" class="form-control my-2"/>
+          <button class="btn btn-success w-100" onclick="depositETH()">🪙 Gửi tiền</button>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="card p-4 shadow-sm">
-          <h5>Rút ETH (chỉ chủ sở hữu)</h5>
-          <input type="number" id="withdrawAmount" placeholder="Số ETH" class="form-control my-2"/>
-          <button class="btn btn-danger w-100" onclick="withdrawETH()">⏎ Rút ETH</button>
+          <h5>Rút tiền (chỉ chủ sở hữu)</h5>
+          <input type="number" id="withdrawAmount" placeholder="Số tiền" class="form-control my-2"/>
+          <button class="btn btn-danger w-100" onclick="withdrawETH()">⏎ Rút tiền</button>
         </div>
       </div>
     </div>
