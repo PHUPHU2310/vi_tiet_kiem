@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ví Tiết Kiệm Cá Nhân</title>
+  <button class="btn btn-secondary mt-3" onclick="logout()">🚪 Đăng xuất</button>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
@@ -47,7 +48,16 @@
   </div>
 
   <script src="app.js"></script>
+  
 </body>
+  <script>
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userEmail");
+    window.location.href = "login.html"; // quay lại trang đăng nhập
+  }
+</script>
+
   <script>
   // Nếu chưa đăng nhập thì chuyển về trang login
   if (localStorage.getItem("loggedIn") !== "true") {
